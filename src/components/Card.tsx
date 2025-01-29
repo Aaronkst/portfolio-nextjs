@@ -1,14 +1,4 @@
-import {
-  Card,
-  Image,
-  Text,
-  Badge,
-  Button,
-  Group,
-  AspectRatio,
-  Anchor,
-  Box,
-} from "@mantine/core";
+import { Anchor, AspectRatio, Box, Card, Image, Text } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
 type DataCardProps = {
@@ -37,8 +27,8 @@ export default function DataCard({
     >
       <Card.Section>
         <Anchor href={href} target="_blank">
-          <AspectRatio ratio={16 / 8}>
-            <Image src={src} alt={alt} />
+          <AspectRatio ratio={1}>
+            <Image src={src} alt={alt} fit="contain" />
           </AspectRatio>
         </Anchor>
       </Card.Section>

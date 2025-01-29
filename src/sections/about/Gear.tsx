@@ -21,7 +21,7 @@ const gears: Gear[] = [
   },
   {
     icon: <IconCode size={64} />,
-    text: "VS Code",
+    text: "Zed Editor",
   },
   // {
   //   icon: <IconKeyboard size={64} />,

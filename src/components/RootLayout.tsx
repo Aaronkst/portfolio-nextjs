@@ -1,3 +1,4 @@
+import { AppStore } from "@/lib/store";
 import {
   Affix,
   Box,
@@ -9,11 +10,10 @@ import {
   rem,
   useMantineTheme,
 } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { IconArrowUp, IconCopyright } from "@tabler/icons-react";
 import { ReactNode } from "react";
 import Navbar from "../sections/Nav";
-import { useMediaQuery, useWindowScroll } from "@mantine/hooks";
-import { AppStore } from "@/lib/store";
 
 type LayoutProps = {
   children: ReactNode;
@@ -55,7 +55,7 @@ function Footer() {
       <Container>
         <Group grow={!isMobile}>
           <Text color="dimmed">
-            <IconCopyright className="inline-icon" /> Aaron Chen
+            <IconCopyright className="inline-icon" /> Aaron
           </Text>
           <Navbar footer />
         </Group>

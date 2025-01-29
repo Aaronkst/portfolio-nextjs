@@ -6,22 +6,29 @@ import { useMediaQuery } from "@mantine/hooks";
 export default function Featured() {
   const isMobile = useMediaQuery("(max-width: 48em)");
   return (
-    <Container my={32}>
+    <Container>
       <SectionTitle title="my featured works" />
-      <Group grow={!isMobile} position="center" my={16}>
+      <Group grow={!isMobile} align="stretch" my={16}>
         <DataCard
-          src="/assets/img/works/dh.png"
-          alt="Card Image"
-          title="Degitic House"
-          href="https://degitic-house.netlify.app"
-          summary="A start-up software house with my colleagues."
+          src="/assets/img/works/tamlai-logo.jpg"
+          alt="tamlai logo"
+          title="Tamlai"
+          href="https://www.tamlai.com"
+          summary="A product-directory for cambodia. Shows the trending products, reviews and price comparisons between stores."
         />
         <DataCard
-          src="/assets/img/works/kti.png"
-          alt="Card Image"
-          title="Kratom Thai Industry"
-          href="https://kratom-thai.netlify.app"
-          summary="A micro-site with landing page for Kratom Company."
+          src="/assets/img/works/easy-logo.png"
+          alt="easy logo"
+          title="Easy Estate"
+          href="https://www.easyestatemm.com/mm"
+          summary="A Myanmar based real-estate website. Supports individual and agent user types."
+        />
+        <DataCard
+          src="/assets/img/works/dh-logo.png"
+          alt="dh logo"
+          title="Degitic House"
+          href="https://www.degitichouse.com"
+          summary="A start-up software house collaborated with co-workers."
         />
       </Group>
     </Container>

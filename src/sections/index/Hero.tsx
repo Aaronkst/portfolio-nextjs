@@ -16,7 +16,7 @@ export default function Hero() {
             className="text-shadow"
             align="center"
           >
-            Aaron Chen
+            Aaron
           </Text>
           <Center>
             <Text color="white" ff="Montserrat Alternates" size={32}>

@@ -5,6 +5,7 @@ import { AppStore } from "../lib/store";
 import { useEffect, useRef, useState } from "react";
 import RootLayout from "../components/RootLayout";
 import PageLoader from "../components/PageLoader";
+import { Toaster } from "sonner";
 
 function CustomFont() {
   return (
@@ -148,6 +149,7 @@ export default function App(props: AppProps) {
           colorScheme: "dark",
         }}
       >
+        <Toaster position="top-right" richColors />
         <CustomFont />
         <GlobalStyles />
         <Flex

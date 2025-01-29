@@ -4,22 +4,14 @@ import {
   Button,
   Container,
   Group,
-  LoadingOverlay,
+  Stack,
   TextInput,
   Textarea,
   useMantineTheme,
-  Dialog,
-  Text,
-  ThemeIcon,
 } from "@mantine/core";
-import {
-  IconAt,
-  IconCheck,
-  IconMessage,
-  IconSend,
-  IconUser,
-} from "@tabler/icons-react";
+import { IconAt, IconMessage, IconSend, IconUser } from "@tabler/icons-react";
 import { FormEvent, useState } from "react";
+import { toast } from "sonner";
 
 type QuoteReq = {
   name: string;
@@ -29,7 +21,6 @@ type QuoteReq = {
 
 export default function EmailForm() {
   const theme = useMantineTheme();
-  const [alertMsg, setAlertMsg] = useState<string>("");
   const [submitted, setSubmitted] = useState(false);
   const [quoteReq, setQuoteReq] = useState<QuoteReq>({
     name: "",
@@ -40,7 +31,7 @@ export default function EmailForm() {
   const encode = (data: { [key: string]: string }) => {
     return Object.keys(data)
       .map(
-        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]),
       )
       .join("&");
   };
@@ -54,11 +45,11 @@ export default function EmailForm() {
       body: encode({ "form-name": "contact", ...quoteReq }),
     })
       .then(() => {
-        setAlertMsg("Received your message! Well get back to you soon!");
+        toast.success("Received your message! Well get back to you soon!");
         setSubmitted(false);
       })
       .catch((error) => {
-        setAlertMsg("Oops! Something went wrong...");
+        toast.error("Oops! Something went wrong...");
         setSubmitted(true);
       });
   };
@@ -72,67 +63,51 @@ export default function EmailForm() {
   };
 
   return (
-    <>
-      <Container my={32}>
-        <SectionTitle title="send me a message" />
-        <Box p={64} bg={theme.colorScheme === "dark" ? "dark" : "gray.0"}>
-          <form
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            onSubmit={handleSubmit}
-          >
-            <TextInput
-              icon={<IconUser size="0.8rem" />}
-              mb={16}
-              name="name"
-              label="Name"
-              required
-              onChange={handleTextChange}
-            />
-            <TextInput
-              icon={<IconAt size="0.8rem" />}
-              mb={16}
-              name="email"
-              label="Email"
-              required
-              onChange={handleTextChange}
-            />
-            <Textarea
-              icon={<IconMessage size="0.8rem" />}
-              rows={4}
-              mb={16}
-              name="message"
-              label="Message"
-              required
-              onChange={handleTextAreaChange}
-            />
-            <Group position="right">
-              <Box>
-                <LoadingOverlay visible={submitted} overlayBlur={2} />
-                <Button rightIcon={<IconSend size={16} />} type="submit">
-                  Send
-                </Button>
-              </Box>
-            </Group>
-          </form>
-        </Box>
-      </Container>
-      {!!alertMsg && (
-        <Dialog
-          opened={!!alertMsg}
-          withCloseButton
-          onClose={() => setAlertMsg("")}
-          position={{ top: 20, left: 20 }}
-        >
-          <Text>
-            <ThemeIcon radius="xl" size="sm" mr={4}>
-              <IconCheck size={"1rem"} />
-            </ThemeIcon>
-            {alertMsg}
-          </Text>
-        </Dialog>
-      )}
-    </>
+    <Container>
+      <SectionTitle title="send me a message" />
+      <form
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        onSubmit={handleSubmit}
+      >
+        <TextInput
+          icon={<IconUser size="0.8rem" />}
+          mb={16}
+          name="name"
+          label="Name"
+          required
+          onChange={handleTextChange}
+        />
+        <TextInput
+          icon={<IconAt size="0.8rem" />}
+          mb={16}
+          name="email"
+          label="Email"
+          required
+          onChange={handleTextChange}
+        />
+        <Textarea
+          icon={<IconMessage size="0.8rem" />}
+          rows={4}
+          mb={16}
+          name="message"
+          label="Message"
+          required
+          onChange={handleTextAreaChange}
+        />
+        <Group position="right">
+          <Box>
+            <Button
+              rightIcon={<IconSend size={16} />}
+              type="submit"
+              loading={submitted}
+            >
+              Send
+            </Button>
+          </Box>
+        </Group>
+      </form>
+    </Container>
   );
 }
